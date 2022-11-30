@@ -6,6 +6,10 @@ package main;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,10 +32,33 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        try {
             response.setContentType("text/html");
             
             String username = request.getParameter("username");
             String password = request.getParameter("password");
+            MessageDigest md = MessageDigest.getInstance("SHA");
+            
+            
+            if(password.length() > 0){
+                //Convert String to Bytes
+                md.update(password.getBytes());
+                byte[] hashedBytes = md.digest();
+                
+                StringBuilder builder = new StringBuilder();
+                
+                String hashedPassword;
+                //Convert the bytes to String
+                for (byte bit : hashedBytes) {
+                    //Append using #02x(HEX)
+                    builder.append(String.format("#02x", bit));
+                    //Convert the hashed hexas to String
+                     hashedPassword = builder.toString();
+                }
+            }
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     
