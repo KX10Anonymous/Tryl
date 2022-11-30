@@ -40,89 +40,10 @@ public class DatabaseUtility {
             System.out.println(ex.toString());
         }
     }
+     
     
     /**
-     * Receives the request parameter from the servlet class which delegates the database operations
-     * @param request  HttpServletRequest 
-     * @return  boolean
-     */
-    public boolean createUser(HttpServletRequest request){
-         try {
-            //Create a message digest with SHA key
-            MessageDigest md = MessageDigest.getInstance("SHA");
-            //Get the password from the post
-            String password = request.getParameter("password");
-            if (password.length() > 0) {
-                md.update(password.getBytes());
-                byte[] hashedBytes = md.digest();
-                StringBuilder builder = new StringBuilder();
-                
-                String hashedPassword ="";
-                //Convert the bytes to String
-                for (byte bit : hashedBytes) {
-                    //Append using #02x(HEX)
-                    builder.append(String.format("#02x", bit));
-                    //Convert the hashed hexas to String
-                     hashedPassword = builder.toString();
-                }
-                
-                  try {
-                        
-                        String name = request.getParameter("name");
-                        String surname = request.getParameter("surname");
-                        String email = request.getParameter("email");
-                        String phone = request.getParameter("phone");
-                        
-                         statement = getConnection().createStatement();
-                        Random rand = new Random();
-
-                        // nextInt as provided by Random is exclusive of the top value so you need to add 1
-                        int randomNum = rand.nextInt((1 - 293829366) + 1) + 1;
-
-                        String query = "Insert into Users VALUES ("+ randomNum+", '"+name+"','"+ surname +"','"+ email +"','"+ phone + "','"+hashedPassword+"');";
-
-                    } catch (SQLException ex) {
-                        Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-            }
-        } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
-        }
-         return true;
-    }
-    
-    
-    
-    /**
-     * Creates 
-     * Receives the request parameter from the servlet class which delegates the database operations
-     * @param request  HttpServletRequest
-     * @return boolean
-     * Returns value to ensure that content has been saved
-     */
-    public boolean createAppointment(HttpServletRequest request){
-        
-        Date date = new Date(request.getParameter("date"));
-        /**If the client is the one creating the appointment then the system should initialise to 
-         * EStatus.CLIENT_CONFIRMED
-         * If the Stylist is Creating, then the system should initialise to EStatus.STYLIST_CONFIRMED
-         */
-        
-        //Get the Client Id
-        String clientId = request.getSession().getAttribute("client_id").toString();
-        //get The Stylist Id from the session Attributes
-        String stylistId = request.getSession().getAttribute("stylist_id").toString();
-        
-        String longitude = request.getParameter("longitude");
-        String latitude = request.getParameter("latitude");
-       
-        
-        return true;
-    }
-    
-    /**
-     * Creates a hash function for the password string plaintext
+     * Creates a hash function for the password string plain text
      * @param password
      * @return 
      */
