@@ -59,6 +59,8 @@ public class LoginServlet extends HttpServlet {
             
             //Perform Actions if there's a matched record
             if(queryResult.next()){
+                //Create User Session
+                 HttpSession session = request.getSession();
                 
                 //Send user to the home page after successful login
                 response.sendRedirect("home.html");
@@ -66,8 +68,6 @@ public class LoginServlet extends HttpServlet {
             
             //Close the connection to the database;
             utility.closeConnection();
-            
-            HttpSession session = request.getSession();
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
