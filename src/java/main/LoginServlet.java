@@ -8,12 +8,16 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -34,32 +38,39 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         try {
             response.setContentType("text/html");
-            
+
             String username = request.getParameter("username");
             String password = request.getParameter("password");
-            MessageDigest md = MessageDigest.getInstance("SHA");
+
+            //Instantiate the database utility class, this will also create the objects fro connection and statement
+            DatabaseUtility utility = new DatabaseUtility();
+
+            //Call the utility method to hash the password
+            String passwordHash = utility.passwordHash(password);
+
+            //Set query to retrieve the password based on user password and username
+            String query = "SELECT * where username='" + username + "' AND passwordHash='" + passwordHash + "'";
+
+            //Retrieve the Statement instance created from the DatabaseUtility constructor call
+            Statement statement = utility.getStatement();
             
+            //Execute query to retrieve the user from database using password and username combination
+            ResultSet queryResult = statement.executeQuery(query);
             
-            if(password.length() > 0){
-                //Convert String to Bytes
-                md.update(password.getBytes());
-                byte[] hashedBytes = md.digest();
+            //Perform Actions if there's a matched record
+            if(queryResult.next()){
                 
-                StringBuilder builder = new StringBuilder();
-                
-                String hashedPassword;
-                //Convert the bytes to String
-                for (byte bit : hashedBytes) {
-                    //Append using #02x(HEX)
-                    builder.append(String.format("#02x", bit));
-                    //Convert the hashed hexas to String
-                     hashedPassword = builder.toString();
-                }
+                //Send user to the home page after successful login
+                response.sendRedirect("home.html");
             }
-        } catch (NoSuchAlgorithmException ex) {
+            
+            //Close the connection to the database;
+            utility.closeConnection();
+            
+            HttpSession session = request.getSession();
+        } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
 
-    
+    }
 }

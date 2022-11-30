@@ -5,6 +5,7 @@
  */
 package main;
 
+import java.beans.PropertyChangeSupport;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
@@ -72,7 +73,7 @@ public class DatabaseUtility {
                         String email = request.getParameter("email");
                         String phone = request.getParameter("phone");
                         
-                         statement = connection.createStatement();
+                         statement = getConnection().createStatement();
                         Random rand = new Random();
 
                         // nextInt as provided by Random is exclusive of the top value so you need to add 1
@@ -92,21 +93,7 @@ public class DatabaseUtility {
     }
     
     
-    public HttpSession login(HttpServletRequest request){
-        
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        
-        String passwordHash = passwordHash(password);
-        
-        
-        
-        HttpSession session = request.getSession();
-        
-        
-        
-        return session;
-    }
+    
     /**
      * Creates 
      * Receives the request parameter from the servlet class which delegates the database operations
@@ -134,8 +121,12 @@ public class DatabaseUtility {
         return true;
     }
     
-    
-    private String passwordHash(String password){
+    /**
+     * Creates a hash function for the password string plaintext
+     * @param password
+     * @return 
+     */
+    public String passwordHash(String password){
         String hashedPass = new String();
          try {
             MessageDigest md = MessageDigest.getInstance("SHA");
@@ -164,4 +155,26 @@ public class DatabaseUtility {
         }
          return hashedPass;
     }
+
+    /**
+     * @return the connection
+     */
+    public Connection getConnection() {
+        return connection;
+    }
+    
+    
+    public void closeConnection() throws SQLException{
+        connection.close();
+    }
+
+    /**
+     * @return the statement
+     */
+    public Statement getStatement() {
+        return statement;
+    }
+    
+    
+   
 }
