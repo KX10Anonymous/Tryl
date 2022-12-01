@@ -4,6 +4,8 @@
  */
 package main.user;
 
+import main.core.content.management.AppointmentsManager;
+
 /**
  *
  * @author J-ANONIMO
@@ -14,7 +16,7 @@ public class User {
     protected String surname;
     protected String email;
     protected String phone;
-   
+    protected AppointmentsManager appointmentsManager;
     
     public User(){
         id = 0;
@@ -99,5 +101,19 @@ public class User {
      */
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    /**
+     * @return the appointmentsManager
+     */
+    public AppointmentsManager getAppointmentsManager() {
+        return appointmentsManager;
+    }
+
+    /**
+     * @param appointmentsManager the appointmentsManager to set
+     */
+    public void setAppointmentsManager(AppointmentsManager appointmentsManager) {
+        this.appointmentsManager = appointmentsManager;
     }
 }
