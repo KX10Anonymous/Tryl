@@ -14,7 +14,7 @@ import sun.util.calendar.LocalGregorianCalendar.Date;
  */
 public class ImagePost extends Activity {
    protected ImageResource resource;
-   protected EPostReaction reaction;
+  
    
     /**
      * 
@@ -54,19 +54,4 @@ public class ImagePost extends Activity {
         this.resource = resource;
     }
 
-    /**
-     * @return the reaction
-     */
-    public EPostReaction getReaction() {
-        return reaction;
-    }
-
-    /**
-     * @param reaction the reaction to set
-     */
-    public void setReaction(EPostReaction reaction) {
-        this.reaction = reaction;
-    }
-   
-    
 }
