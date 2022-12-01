@@ -97,6 +97,7 @@ public class ReviewManagement {
             }else{
                 reviewsHashMap.put(id, review);
             }
+            return true;
         }
         return false;
         
