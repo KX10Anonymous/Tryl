@@ -26,8 +26,30 @@ public class User {
         phone = "";
     }
     
+    /**
+     * 
+     * @param id
+     * @param surname
+     * @param firstname
+     * @param phone
+     * @param email 
+     */
     public User(int id, String surname, String firstname, String phone, String email){
         this.id = id;
+        this.surname = surname;
+        this.firstname = firstname;
+        this.phone = phone;
+        this.email = email;
+    }
+    
+    /**
+     * 
+     * @param surname
+     * @param firstname
+     * @param phone
+     * @param email 
+     */
+    public User(String surname, String firstname, String phone, String email){
         this.surname = surname;
         this.firstname = firstname;
         this.phone = phone;

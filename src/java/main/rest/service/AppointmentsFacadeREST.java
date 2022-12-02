@@ -43,15 +43,15 @@ public class AppointmentsFacadeREST extends AbstractFacade<Appointments> {
         javax.ws.rs.core.MultivaluedMap<String, String> map = pathSegment.getMatrixParameters();
         java.util.List<String> clientId = map.get("clientId");
         if (clientId != null && !clientId.isEmpty()) {
-            key.setClientId(new java.lang.Integer(clientId.get(0)));
+            key.setClientId(Integer.parseInt(clientId.get(0)));
         }
         java.util.List<String> id = map.get("id");
         if (id != null && !id.isEmpty()) {
-            key.setId(new java.lang.Integer(id.get(0)));
+            key.setId(Integer.parseInt(id.get(0)));
         }
         java.util.List<String> stylistId = map.get("stylistId");
         if (stylistId != null && !stylistId.isEmpty()) {
-            key.setStylistId(new java.lang.Integer(stylistId.get(0)));
+            key.setStylistId(Integer.parseInt(stylistId.get(0)));
         }
         return key;
     }
