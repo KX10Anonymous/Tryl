@@ -5,7 +5,7 @@
 package main.core.content;
 
 import main.user.Client;
-import main.user.Stylist;
+import main.user.Therapist;
 import sun.util.calendar.LocalGregorianCalendar;
 
 /**
@@ -37,7 +37,7 @@ public class Comment extends Activity{
      * @param client
      * @param stylist 
      */
-    public Comment(String text,LocalGregorianCalendar.Date date, EActivityType type, Client client, Stylist stylist) {
+    public Comment(String text,LocalGregorianCalendar.Date date, EActivityType type, Client client, Therapist stylist) {
         super(date, type, client, stylist);
         
          //Validate the text before assigning

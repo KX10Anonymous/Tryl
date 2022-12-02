@@ -5,7 +5,7 @@
 package main.core.content;
 
 import main.user.Client;
-import main.user.Stylist;
+import main.user.Therapist;
 import sun.util.calendar.LocalGregorianCalendar.Date;
 
 /**
@@ -35,7 +35,7 @@ public class ImagePost extends Activity {
      * @param client
      * @param stylist 
      */
-    public ImagePost(ImageResource resource, Date date, EActivityType type, Client client, Stylist stylist){
+    public ImagePost(ImageResource resource, Date date, EActivityType type, Client client, Therapist stylist){
         super(date, type, client, stylist);
         this.resource = resource;
     }

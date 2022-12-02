@@ -5,7 +5,7 @@
 package main.core.content;
 
 import main.user.Client;
-import main.user.Stylist;
+import main.user.Therapist;
 import sun.util.calendar.LocalGregorianCalendar;
 
 /**
@@ -24,7 +24,7 @@ public class ClientReaction extends Activity {
      * @param client
      * @param stylist 
      */
-    public ClientReaction(LocalGregorianCalendar.Date date, EActivityType type, Client client, Stylist stylist) {
+    public ClientReaction(LocalGregorianCalendar.Date date, EActivityType type, Client client, Therapist stylist) {
         super(date, type, client, stylist);
     }
     

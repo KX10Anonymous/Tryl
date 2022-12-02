@@ -5,7 +5,7 @@
 package main.core.content;
 
 import main.user.Client;
-import main.user.Stylist;
+import main.user.Therapist;
 import sun.util.calendar.LocalGregorianCalendar.Date;
 
 
@@ -19,7 +19,7 @@ public class Activity {
     protected Date date;
     protected EActivityType type;
     protected Client cient;
-    protected Stylist stylist;
+    protected Therapist stylist;
     
     /**
      * 
@@ -38,7 +38,7 @@ public class Activity {
      * @param client
      * @param stylist 
      */
-    public Activity(Date date, EActivityType type, Client client, Stylist stylist){
+    public Activity(Date date, EActivityType type, Client client, Therapist stylist){
         this.date = date;
         this.cient = client;
         this.stylist = stylist;

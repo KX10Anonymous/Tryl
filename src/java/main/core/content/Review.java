@@ -5,7 +5,7 @@
 package main.core.content;
 
 import main.user.Client;
-import main.user.Stylist;
+import main.user.Therapist;
 import sun.util.calendar.LocalGregorianCalendar.Date;
 
 /**
@@ -15,7 +15,7 @@ import sun.util.calendar.LocalGregorianCalendar.Date;
 public class Review {
     protected Date date;
     protected Client client;
-    protected Stylist stylist;
+    protected Therapist stylist;
     protected EReviewLevel level;
 
     /**
@@ -49,14 +49,14 @@ public class Review {
     /**
      * @return the stylist
      */
-    public Stylist getStylist() {
+    public Therapist getStylist() {
         return stylist;
     }
 
     /**
      * @param stylist the stylist to set
      */
-    public void setStylist(Stylist stylist) {
+    public void setStylist(Therapist stylist) {
         this.stylist = stylist;
     }
 
