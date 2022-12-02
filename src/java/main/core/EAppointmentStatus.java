@@ -9,8 +9,9 @@ package main.core;
  * @author J-ANONIMO
  */
 public enum EAppointmentStatus {
-    OPEN,
+    UNCONFIRMED,
     VERIFIED,
     CANCELLED,
-    CLOSED
+    CLOSED,
+    
 }

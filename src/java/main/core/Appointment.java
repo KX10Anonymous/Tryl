@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package main.core;
+import java.util.ArrayList;
 import sun.util.calendar.LocalGregorianCalendar.Date;
 
 /**
@@ -10,26 +11,26 @@ import sun.util.calendar.LocalGregorianCalendar.Date;
  * @author J-ANONIMO
  */
 public class Appointment {
-    protected Date date;
-    protected String longitude;
-    protected String latitude;
-    protected EAppointmentStatus appointmentStatus;
-    protected ERating rating;
-    protected int id;
+    private Date date;
+    private String longitude;
+    private String latitude;
+    private EAppointmentStatus appointmentStatus;
+    private int id;
+    private ArrayList<Style> styles;
+    
     /**
      * 
      * @param date
      * @param longitude
      * @param latitude
-     * @param status
-     * @param rating 
+     * @param status 
      */
-    public Appointment(Date date, String longitude, String latitude, EAppointmentStatus status, ERating rating){
+    public Appointment(Date date, String longitude, String latitude, EAppointmentStatus status){
         this.date = date;
         this.latitude = latitude;
         this.longitude = longitude;
         this.appointmentStatus = status;
-        this.rating = rating;
+        styles = new ArrayList<>();
     }
     
     /**
@@ -38,16 +39,15 @@ public class Appointment {
      * @param date
      * @param longitude
      * @param latitude
-     * @param status
-     * @param rating 
+     * @param status 
      */
-    public Appointment(int id, Date date, String longitude, String latitude, EAppointmentStatus status, ERating rating){
+    public Appointment(int id, Date date, String longitude, String latitude, EAppointmentStatus status){
         this.id = id;
         this.date = date;
         this.latitude = latitude;
         this.longitude = longitude;
         this.appointmentStatus = status;
-        this.rating = rating;
+        styles = new ArrayList<>();
     }
 
     /**
@@ -106,19 +106,6 @@ public class Appointment {
         this.appointmentStatus = appointmentStatus;
     }
 
-    /**
-     * @return the rating
-     */
-    public ERating getRating() {
-        return rating;
-    }
-
-    /**
-     * @param rating the rating to set
-     */
-    public void setRating(ERating rating) {
-        this.rating = rating;
-    }
 
     /**
      * @return the id
@@ -148,7 +135,7 @@ public class Appointment {
      * @return true/false
      */
     public boolean isAppointmentAlive(){
-        return appointmentStatus == EAppointmentStatus.OPEN;
+        return appointmentStatus == EAppointmentStatus.UNCONFIRMED;
     }
     
     /**
@@ -188,5 +175,40 @@ public class Appointment {
             } 
         }
         return true;
+    }
+
+    /**
+     * @return the styles
+     */
+    public ArrayList<Style> getStyles() {
+        return styles;
+    }
+
+    /**
+     * @param styles the styles to set
+     */
+    public void setStyles(ArrayList<Style> styles) {
+        this.styles = styles;
+    }
+    
+    /**
+     * Adds style to container and returns true if operation was a success.
+     * @param style
+     * @return 
+     */
+    public boolean addStyles(Style style){
+        if(style != null){
+            if(styles != null){
+                styles.add(style);
+            }else{
+                //In case the container is null
+                styles = new ArrayList<>();
+                //Add style to container
+                styles.add(style);
+            }
+            return true;
+            
+        }
+        return false;
     }
 }
